@@ -2,13 +2,41 @@
 Integrate Grafana with Ambari Metrics System
 
 Development Notes
+
+Install InfluxDB (MacOS)
+```
+brew update
+brew install influxdb
+```
+
+Start InfluxDB (MacOS)
+```
+influxdb -config=/usr/local/etc/influxdb.conf
+```
+
+Access InfluxDB web console by hitting http://localhost:8083 from the browser.
+
+
+Checkout Grafana code
 ```
 npm install -g grunt
 git clone https://github.com/grafana/grafana.git
 cd grafana
 git checkout -b v1.9.1 v1.9.1
+```
+
+Run Grafana in development mode
+```
 npm install
 grunt server
 ```
 
-Hit http://localhost:5061 from the browser.
+Load Grafana by hitting http://localhost:5061 from the browser.
+
+Modify Grafana config
+```
+cp src/config.js.sample src/config.js
+vi src/config.js
+```
+
+
