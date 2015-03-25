@@ -8,4 +8,7 @@ git clone https://github.com/grafana/grafana.git
 cd grafana
 git checkout -b v1.9.1 v1.9.1
 npm install
+grunt server
 ```
+
+Hit http://localhost:5061 from the browser.
