@@ -64,5 +64,11 @@ curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "metrics"}'
 curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "grafana"}'
 ```
 
+Populate sample data via JavaScript console as shown in http://influxdb.com/docs/v0.8/introduction/getting_started.html.
+
+* Hit http://localhost:5061
+* Click on "First graph", then select "edit"
+* Type "cpu_idle" as "series name"
+* A line graph is shown
 
 
