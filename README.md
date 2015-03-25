@@ -39,4 +39,30 @@ cp src/config.js.sample src/config.js
 vi src/config.js
 ```
 
+Uncomment InfluxDB example section, and modify the parameters as follows:
+```
+      datasources: {
+        influxdb: {
+          type: 'influxdb',
+          url: "http://localhost:8086/db/metrics",
+          username: 'root',
+          password: 'root',
+        },
+        grafana: {
+          type: 'influxdb',
+          url: "http://localhost:8086/db/grafana",
+          username: 'root',
+          password: 'root',
+          grafanaDB: true
+        },
+      },
+```
+
+Create the "metrics" and "grafana" databases in InfluxDB
+```
+curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "metrics"}'
+curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "grafana"}'
+```
+
+
 
