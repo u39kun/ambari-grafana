@@ -29,11 +29,11 @@ Create Ambari Datasource in Grafana UI
 ---
 Access Grafana Web UI at http://grafana-host:3000 and log in as admin / admin.
 
-Create an Ambari datasource for your cluster
+Create Ambari Datasource for Your Cluster
 ---
 Note: You can set up multiple Ambari datasources if you wish to visualize multiple Ambari-managed clusters.
 
-Create Metric Graphs using the Ambari datasource
+Create Metric Graphs using Ambari Datasource
 ---
 
 
