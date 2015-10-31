@@ -3,6 +3,8 @@
 Install Grafana
 ---------------
 
+You can install Grafana on any host.  It does not need to be co-located with Ambari Server.
+
 Run the following command for CentOS/Red Hat:
 
 ```
@@ -21,7 +23,7 @@ Start Grafana
 service grafana-server start
 ```
 
-Access Grafana Web UI at http://<your-host>:3000 and log in as admin / admin.
+Access Grafana Web UI at http://grafana-host:3000 and log in as admin / admin.
 
 Create an Ambari datasource
 
