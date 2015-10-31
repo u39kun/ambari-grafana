@@ -27,7 +27,7 @@ For other OS's, please follow the instructions at: http://docs.grafana.org/insta
 Deploy ambari-grafana
 ---
 ```
-wget ...
+wget https://github.com/u39kun/ambari-grafana/raw/master/dist/ambari-grafana.tgz; tar zxvf ambari-grafana.tgz -C /usr/share/grafana/public/app/plugins/datasource
 ```
 
 Start Grafana
