@@ -44,7 +44,9 @@ Click on *Data Sources* in the left nav and click on *Add New* in the top nav.
 
 Note: You can set up multiple Ambari Data Sources if you wish to visualize multiple Ambari-managed clusters.
 
-In case you have not used Grafana before, the UI can be a little tricky to get used to.
+In case you have not used Grafana before...
+---
+Grafana UI can be a little tricky to get used to.
 Here's a walk through of how to create a dashboard and add a graph to it.
 
 Create a New Dashboard
