@@ -16,24 +16,29 @@ Install Grafana
 
 You can install Grafana on any host.  It does not need to be co-located with Ambari Server.  The only requirement is that it has network access to Ambari Server.
 
-Run the following command for CentOS/Red Hat:
-
+Install on CentOS/Red Hat:
 ```
-yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
+sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
 ```
 
-For other OS's, please follow the instructions at: http://docs.grafana.org/installation/
+Install on Ubuntu/Debian:
+```
+wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.5.0_amd64.deb
+sudo apt-get install -y adduser libfontconfig
+sudo dpkg -i grafana_2.5.0_amd64.deb
+```
 
 Deploy ambari-grafana
 ---
 ```
-wget https://github.com/u39kun/ambari-grafana/raw/master/dist/ambari-grafana.tgz; tar zxvf ambari-grafana.tgz -C /usr/share/grafana/public/app/plugins/datasource
+sudo wget https://github.com/u39kun/ambari-grafana/raw/master/dist/ambari-grafana.tgz
+sudo tar zxvf ambari-grafana.tgz -C /usr/share/grafana/public/app/plugins/datasource
 ```
 
 Start Grafana
 ---
 ```
-service grafana-server start
+sudo service grafana-server start
 ```
 
 Create Ambari Data Source in Grafana UI
