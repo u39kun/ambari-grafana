@@ -3,7 +3,7 @@
 Install Grafana
 ---------------
 
-You can install Grafana on any host.  It does not need to be co-located with Ambari Server.
+You can install Grafana on any host.  It does not need to be co-located with Ambari Server.  The only requirement is that it has network access to Ambari Server.
 
 Run the following command for CentOS/Red Hat:
 
