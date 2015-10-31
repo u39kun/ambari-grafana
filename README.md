@@ -1,6 +1,9 @@
 # ambari-grafana
 
 Use ambari-grafana to visualize metrics exposed via Ambari in Grafana.
+The following service metrics are supported as of now: HDFS, YARN, HBase, Storm, Kafka, Flume, Accumulo, and Ambari Metrics
+
+*This has been tested with Ambari 2.1.2 + HDP 2.3.*
 
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/dashboard.png "Ambari Grafana Dashboard")
 
