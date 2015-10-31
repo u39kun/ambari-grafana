@@ -49,9 +49,11 @@ Click on *Data Sources* in the left nav and click on *Add New* in the top nav:
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-data-source.png "Create a new data source")
 
 * Name: *Choose your own data source name*
+* Default: *Recommended to make this the default data source so when you create new graphs, you don't have to select this Ambari Data Source every time*
 * Type: **Ambari**
 * Cluster: *This has to exactly match the cluster name in Ambari*
-* Default: *Suggested to make this the default data source so when you create new graphs, you don't have to select this Ambari Data Source every time*
+* Stack: HDP (*or other stack name that is installed on the cluster*)
+* Version: 2.3 (*or other stack version that is installed on the cluster*)
 * Url: *URL of the Ambari Server, including the port*  E.g., http://1.2.3.4:8080
 * Access: **proxy**
 * Basic Auth: **Enable**
