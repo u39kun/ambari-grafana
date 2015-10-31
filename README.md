@@ -28,6 +28,11 @@ sudo apt-get install -y adduser libfontconfig
 sudo dpkg -i grafana_2.5.0_amd64.deb
 ```
 
+Install on SUSE/SLES:
+```
+sudo rpm -i --nodeps grafana-2.5.0-1.x86_64.rpm
+```
+
 Deploy ambari-grafana
 ---
 ```
