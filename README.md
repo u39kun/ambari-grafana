@@ -1,5 +1,9 @@
 # ambari-grafana
 
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/dashboard.png "Ambari Grafana Dashboard")
+
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/select-metric.png "Ambari Grafana Graph Builder")
+
 Install Grafana
 ---------------
 
