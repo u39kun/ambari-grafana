@@ -28,7 +28,9 @@ service grafana-server start
 Create Ambari Data Source in Grafana UI
 ---
 Access Grafana Web UI at http://grafana-host:3000 and log in as admin / admin.
-Click on *Data Sources* in the left nav and click on *Add New* in the top nav.
+
+Click on *Data Sources* in the left nav and click on *Add New* in the top nav:
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-data-source.png "Create a new data source")
 
 * Name: *Choose your own data source name*
 * Type: **Ambari**
@@ -69,6 +71,7 @@ Create a new Graph
 
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/set-title.png "Create a new graph - set title")
 
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/save-dashboard.png "Create a new graph - save dashboard")
 
 
 
