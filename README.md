@@ -44,8 +44,17 @@ Click on *Data Sources* in the left nav and click on *Add New* in the top nav.
 
 Note: You can set up multiple Ambari Data Sources if you wish to visualize multiple Ambari-managed clusters.
 
-Create New Grafana Dashboard
+Create a New Dashboard
 ---
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-grafana-dashboard.png "Create a new dashboard")
+
+Create a new Graph
+---
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-graph-strip-hover.png "Create a new graph - strip hover")
+
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-graph-menu.png "Create a new graph - menu")
+
+
 
 
 
