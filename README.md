@@ -54,6 +54,7 @@ Create a new Graph
 
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/create-graph-menu.png "Create a new graph - menu")
 
+![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/edit-graph.png "Create a new graph - edit")
 
 
 
