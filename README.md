@@ -1,74 +1,28 @@
 # ambari-grafana
-Integrate Grafana with Ambari Metrics System
 
-Development Notes
+Install Grafana
+---------------
 
-Install InfluxDB (MacOS)
-```
-brew update
-brew install influxdb
-```
+Run the following command for CentOS/Red Hat:
 
-Start InfluxDB (MacOS)
 ```
-influxdb -config=/usr/local/etc/influxdb.conf
+$ sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
 ```
 
-Access InfluxDB web console by hitting http://localhost:8083 from the browser.
+For other OS's, please follow the instructions at: http://docs.grafana.org/installation/
 
-
-Checkout Grafana code
+Deploy ambari-grafana
 ```
-npm install -g grunt
-git clone https://github.com/grafana/grafana.git
-cd grafana
-git checkout -b v1.9.1 v1.9.1
+wget ...
 ```
 
-Run Grafana in development mode
+Start Grafana
 ```
-npm install
-grunt server
-```
-
-Load Grafana by hitting http://localhost:5061 from the browser.
-
-Modify Grafana config
-```
-cp src/config.js.sample src/config.js
-vi src/config.js
+service grafana-server start
 ```
 
-Uncomment InfluxDB example section, and modify the parameters as follows:
-```
-      datasources: {
-        influxdb: {
-          type: 'influxdb',
-          url: "http://localhost:8086/db/metrics",
-          username: 'root',
-          password: 'root',
-        },
-        grafana: {
-          type: 'influxdb',
-          url: "http://localhost:8086/db/grafana",
-          username: 'root',
-          password: 'root',
-          grafanaDB: true
-        },
-      },
-```
+Access Grafana Web UI at http://<your-host>:3000 and log in as admin / admin.
 
-Create the "metrics" and "grafana" databases in InfluxDB
-```
-curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "metrics"}'
-curl -X POST 'http://localhost:8086/db?u=root&p=root' -d '{"name": "grafana"}'
-```
-
-Populate sample data via JavaScript console as shown in http://influxdb.com/docs/v0.8/introduction/getting_started.html.
-
-* Hit http://localhost:5061
-* Click on "First graph", then select "edit"
-* Type "cpu_idle" as "series name"
-* A line graph is shown
+Create an Ambari datasource
 
 
