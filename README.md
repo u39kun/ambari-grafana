@@ -19,7 +19,7 @@ You can install Grafana on any host.  It does not need to be co-located with Amb
 Run the following command for CentOS/Red Hat:
 
 ```
-$ sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
+yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
 ```
 
 For other OS's, please follow the instructions at: http://docs.grafana.org/installation/
