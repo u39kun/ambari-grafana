@@ -1,0 +1,14 @@
+{
+  "pluginType": "datasource",
+  "name": "Ambari",
+
+  "type": "ambari",
+  "serviceName": "AmbariDatasource",
+
+  "module": "app/plugins/datasource/ambari/datasource",
+    "partials": {
+    "config": "app/plugins/datasource/ambari/partials/config.html"
+  },
+
+  "metrics": true
+}
