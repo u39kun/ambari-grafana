@@ -1,6 +1,7 @@
 define([
     'angular',
     'lodash',
+    'jquery',
     './directives',
     './queryCtrl',
   ],
@@ -9,8 +10,9 @@ define([
 
     var module = angular.module('grafana.services');
 
-    module.factory('AmbariDatasource', function ($q, backendSrv) {
-
+    module.factory('AmbariDatasource', function ($q, backendSrv, templateSrv) {
+      //debugger;
+      // console.log(templateSrv._texts.hosts);
       // TODO: remove hardcoding
       var componentToServiceMapping = {
         'NAMENODE': 'HDFS',
@@ -30,6 +32,7 @@ define([
         'ACCUMULO_TSERVER': 'ACCUMULO',
         'METRICS_COLLECTOR': 'AMBARI_METRICS'
       };
+
       var components = _.keys(componentToServiceMapping);
 
       function AmbariDatasource(datasource) {
@@ -38,6 +41,7 @@ define([
         this.clusterName = datasource.jsonData.clusterName;
         this.stackName = datasource.jsonData.stackName;
         this.stackVersion = datasource.jsonData.stackVersion;
+
       }
 
       AmbariDatasource.prototype.query = function (options) {
@@ -59,7 +63,6 @@ define([
 
         var component = targetsWithMetric[0].component;
         var service = componentToServiceMapping[component];
-
         return backendSrv.get(this.url +
           '/api/v1/clusters/' + this.clusterName + '/services/' + service + '/components/' + component + '?' +
           'fields=' + fields).then(
@@ -68,7 +71,7 @@ define([
               return $q.when({});
             }
             var series = [];
-
+            //debugger;
             _.forEach(targetsWithMetric, function (target) {
               console.log('processing ' + target.metric);
               var metricData = res;
@@ -90,6 +93,69 @@ define([
 
             return $q.when({data: series});
           });
+      };
+
+      AmbariDatasource.prototype.metricFindQuery = function(query) {
+        var interpolated;
+
+        try {
+          interpolated = templateSrv.replace(query);
+        } catch (err) {
+          return $q.reject(err);
+        }
+
+        return this.doAmbariRequest({
+            method: 'GET',
+            url: '/api/v1/clusters/' + this.clusterName + '/' + interpolated
+          })
+
+          .then(function(results) {
+            var queryName = interpolated.split('/');
+            //split the query by /
+            var name = queryName[queryName.length - 1];
+            //grab the last element of the split query
+            return _.map(results.data.items, function(metric) {
+              switch (name) {
+                case "hosts":
+                  var dname = metric.Hosts.host_name;
+                  //iterate through all hosts
+                  break;
+                case "host_components":
+                  dname = metric.HostRoles.component_name;
+                  //iterate through all component names
+                  break;
+                default:
+                  dname = metric.metrics;
+                  // this won't work because metrics cannot be iterated through .items - needs to be removed..
+                  break;
+              }
+              return {
+                text: dname,
+                expandable: metric.expandable ? true : false
+              };
+            });
+          });
+      };
+
+      AmbariDatasource.prototype.testDatasource = function() {
+        return this.metricFindQuery('hosts').then(function () {
+          return { status: "success", message: "Data source is working", title: "Success" };
+        });
+      };
+
+      AmbariDatasource.prototype.doAmbariRequest = function(options) {
+        if (this.basicAuth || this.withCredentials) {
+          options.withCredentials = true;
+        }
+        if (this.basicAuth) {
+          options.headers = options.headers || {};
+          options.headers.Authorization = this.basicAuth;
+        }
+
+        options.url = this.url + options.url;
+        options.inspect = { type: 'ambari' };
+
+        return backendSrv.datasourceRequest(options);
       };
 
       AmbariDatasource.prototype.listSeries = function (query) {
@@ -114,6 +180,19 @@ define([
           return { text: k };
         });
         return $q.when(componentKeyCache);
+      };
+
+      //Added Hosts as a dropdown to query
+      var hostsDropdown = null;
+      AmbariDatasource.prototype.suggestHosts = function (query) {
+        console.log(query);
+        return this.doAmbariRequest({method: 'GET', url: '/api/v1/clusters/' + this.clusterName + '/hosts/'})
+          .then(function (results) {
+            return _.map(results.data.items, function (metric) {
+              hostsDropdown = metric.Hosts.host_name;
+              return {text: hostsDropdown};
+            });
+          });
       };
 
       var serviceMetricKeyCache = {};
@@ -153,9 +232,11 @@ define([
       };
 
       /*
-      AmbariDatasource.prototype.annotationQuery = function (annotation, rangeUnparsed) {
-      };
-      */
+       AmbariDatasource.prototype.annotationQuery = function (annotation, rangeUnparsed) {
+       };
+
+       add comment
+       */
 
       var aggregatorsPromise = null;
       AmbariDatasource.prototype.getAggregators = function () {
