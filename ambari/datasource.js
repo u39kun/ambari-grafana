@@ -11,9 +11,10 @@ define([
     var module = angular.module('grafana.services');
 
     module.factory('AmbariDatasource', function ($q, backendSrv, templateSrv) {
-      var componentToServiceMapping = {};
-      var components = {};
 
+      /**
+       * Ambari Datasource Constructor
+       */
       function AmbariDatasource(datasource) {
         this.name = datasource.name;
         this.url = datasource.url;
@@ -23,6 +24,9 @@ define([
         this.initializeComponentMapping();
       }
 
+      /**
+       * Ambari Datasource Authentication
+       */
       AmbariDatasource.prototype.doAmbariRequest = function (options) {
         if (this.basicAuth || this.withCredentials) {
           options.withCredentials = true;
@@ -37,11 +41,14 @@ define([
 
         return backendSrv.datasourceRequest(options);
       };
-      /*
-       // Ambari - Initialize Component to Service Mapping.
-       --
-       Creates an object array map of Component to Service Names.
+      
+      /**
+       * Ambari Datasource - Initialize Component to Service Mapping.
+       *
+       * Creates an object array map of Component to Service Names.
        */
+      var componentToServiceMapping = {};
+      var components = {};
       AmbariDatasource.prototype.initializeComponentMapping = function () {
         backendSrv.get(this.url + '/api/v1/stacks/' + this.stackName + '/versions/'
           + this.stackVersion + '/services?artifacts/Artifacts/artifact_name=metrics_descriptor&fields=artifacts/*')
@@ -60,6 +67,9 @@ define([
           });
       };
 
+      /**
+       * Ambari Datasource Query (called once per graph)
+       */
       AmbariDatasource.prototype.query = function (options) {
         var from = Math.floor(options.range.from.valueOf() / 1000);
         var to = Math.floor(options.range.to.valueOf() / 1000);
@@ -137,6 +147,9 @@ define([
         }
       };
 
+      /**
+       * Ambari Datasource Templating Variables.
+       */
       AmbariDatasource.prototype.metricFindQuery = function (query) {
         var interpolated;
         try {
@@ -176,17 +189,21 @@ define([
           });
       };
 
-      /*
-       // Ambari - Test Data Source Connection.
-       --
-       Added Check to see if Datasource is working. Throws up an error in the Datasources page if incorrect info
-       is passed on.
+      /**
+       * Ambari Datasource - Test Data Source Connection.
+       *
+       * Added Check to see if Datasource is working. Throws up an error in the 
+       * Datasources page if incorrect info is passed on.
        */
       AmbariDatasource.prototype.testDatasource = function () {
         return this.metricFindQuery('hosts').then(function () {
           return {status: "success", message: "Data source is working", title: "Success"};
         });
       };
+
+      /**
+       * Ambari Datasource List Series.
+       */
       AmbariDatasource.prototype.listSeries = function (query) {
         // wrap in regex
         if (query && query.length > 0 && query[0] !== '/') {
@@ -194,6 +211,12 @@ define([
         }
         return $q.when([]);
       };
+
+      /**
+       * Ambari Datasource Suggest Components.
+       *
+       * Suggest Components and store in cache.
+       */
       var componentKeyCache = null;
 
       AmbariDatasource.prototype.suggestComponents = function (query) {
@@ -207,7 +230,11 @@ define([
         return $q.when(componentKeyCache);
       };
 
-      //Added Hosts as a dropdown to query
+      /**
+       * Ambari Datasource Suggest Hosts
+       *
+       * Query Hosts of the datasource's cluster and add them to a dropdown 
+       */
       AmbariDatasource.prototype.suggestHosts = function (query) {
         console.log(query);
         return this.doAmbariRequest({method: 'GET', url: '/api/v1/clusters/' + this.clusterName + '/hosts/'})
@@ -218,6 +245,12 @@ define([
             });
           });
       };
+
+      /**
+       * Ambari Datasource Suggest Metrics
+       * 
+       * Suggest Metrics based on the component chosen and store in cache.
+       */
       var serviceMetricKeyCache = {};
       AmbariDatasource.prototype.suggestMetrics = function (query, component) {
         if (!component) {
@@ -249,7 +282,9 @@ define([
         );
       };
 
-
+      /**
+       * Ambari Datasource Get Aggregators.
+       */
       var aggregatorsPromise = null;
       AmbariDatasource.prototype.getAggregators = function () {
         if (aggregatorsPromise) {
@@ -260,6 +295,7 @@ define([
         ]);
         return aggregatorsPromise;
       };
+
       return AmbariDatasource;
     });
   }
