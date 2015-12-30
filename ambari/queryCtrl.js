@@ -47,6 +47,12 @@ define([
             .then(callback);
         };
 
+        $scope.suggestHosts = function(query, callback) {
+          $scope.datasource.suggestHosts(query)
+            .then($scope.getTextValues)
+            .then(callback);
+        };
+
         $scope.suggestMetrics = function(query, callback) {
           $scope.datasource.suggestMetrics(query, $scope.target.component)
             .then($scope.getTextValues)

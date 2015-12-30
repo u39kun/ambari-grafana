@@ -37,6 +37,7 @@
     </ul>
 
     <ul class="tight-form-list" role="menu">
+
         <li class="tight-form-item" style="width: 86px">
             Component
         </li>
@@ -49,6 +50,23 @@
                 <i class="fa fa-warning"></i>
             </a>
         </li>
+
+
+
+        <li class="tight-form-item" style="width: 86px">
+            Hosts
+        </li>
+        <li>
+            <input type="text" class="input-large tight-form-input" ng-model="target.hosts"
+                   spellcheck='false' bs-typeahead="suggestHosts" placeholder="host name" data-min-length=0 data-items=100
+                   ng-blur="targetBlur()">
+            </input>
+            <a bs-tooltip="target.errors.metric" style="color: rgb(229, 189, 28)" ng-show="target.errors.metric">
+                <i class="fa fa-warning"></i>
+            </a>
+        </li>
+
+
 
         <li class="tight-form-item" style="width: 86px">
             Metric
