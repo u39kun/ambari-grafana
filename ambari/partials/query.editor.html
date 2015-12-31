@@ -39,8 +39,8 @@
     <ul class="tight-form-list" role="menu">
 
         <li class="tight-form-item" style="width: 86px">
-            Component
-        </li>
+        Component
+    </li>
         <li>
             <input type="text" class="input-large tight-form-input" ng-model="target.component"
                    spellcheck='false' bs-typeahead="suggestComponents" placeholder="component name" data-min-length=0 data-items=100
@@ -51,6 +51,24 @@
             </a>
         </li>
 
+
+
+
+
+
+
+        <li class="tight-form-item" style="width: 86px">
+            Metric
+        </li>
+        <li>
+            <input type="text" class="input-large tight-form-input" ng-model="target.metric"
+                   spellcheck='false' bs-typeahead="suggestMetrics" placeholder="metric name" data-min-length=0 data-items=100
+                   ng-blur="targetBlur()">
+            </input>
+            <a bs-tooltip="target.errors.metric" style="color: rgb(229, 189, 28)" ng-show="target.errors.metric">
+                <i class="fa fa-warning"></i>
+            </a>
+        </li>
 
 
         <li class="tight-form-item" style="width: 86px">
@@ -68,22 +86,10 @@
 
 
 
-        <li class="tight-form-item" style="width: 86px">
-            Metric
-        </li>
-        <li>
-            <input type="text" class="input-large tight-form-input" ng-model="target.metric"
-                   spellcheck='false' bs-typeahead="suggestMetrics" placeholder="metric name" data-min-length=0 data-items=100
-                   ng-blur="targetBlur()">
-            </input>
-            <a bs-tooltip="target.errors.metric" style="color: rgb(229, 189, 28)" ng-show="target.errors.metric">
-                <i class="fa fa-warning"></i>
-            </a>
-        </li>
-        <li class="tight-form-item">
+        <li class="tight-form-item" ng-hide="target.hosts">
             Aggregator
         </li>
-        <li>
+        <li ng-hide="target.hosts">
             <select ng-model="target.aggregator" class="tight-form-input input-small"
                     ng-options="agg for agg in aggregators"
                     ng-change="targetBlur()">
