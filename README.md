@@ -46,6 +46,24 @@ Start Grafana
 sudo service grafana-server start
 ```
 
+Dockerized Grafana with Ambari datasource
+---
+Easy deployement for Docker users:
+```
+# create /var/lib/grafana as persistent volume storage
+docker run -d -v /var/lib/grafana --name grafana-xxl-storage busybox:latest
+
+# start grafana-xxl
+docker run \
+  -d \
+  -p 3000:3000 \
+  --name grafana-xxl \
+  --volumes-from grafana-xxl-storage \
+  monitoringartist/grafana-xxl
+```
+      
+Visit [Grafana XXL project](https://github.com/monitoringartist/grafana-xxl) for more details.      
+
 Create Ambari Data Source in Grafana UI
 ---
 Access Grafana Web UI at http://grafana-host:3000 and log in as admin / admin.
