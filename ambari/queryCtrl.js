@@ -1,9 +1,8 @@
 define([
       'angular',
-      'lodash',
-      'kbn'
+      'lodash'
     ],
-    function (angular, _, kbn) {
+    function (angular, _) {
       'use strict';
 
       var module = angular.module('grafana.controllers');
@@ -100,18 +99,6 @@ define([
 
         function validateTarget(target) {
           var errs = {};
-
-          if (target.shouldDownsample) {
-            try {
-              if (target.downsampleInterval) {
-                kbn.describe_interval(target.downsampleInterval);
-              } else {
-                errs.downsampleInterval = "You must supply a downsample interval (e.g. '1m' or '1h').";
-              }
-            } catch(err) {
-              errs.downsampleInterval = err.message;
-            }
-          }
 
           if (target.tags && _.has(target.tags, target.currentTagKey)) {
             errs.tags = "Duplicate tag key '" + target.currentTagKey + "'.";
