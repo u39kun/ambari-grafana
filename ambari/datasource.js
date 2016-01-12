@@ -148,6 +148,7 @@ define([
 
       /**
        * Ambari Datasource Templating Variables.
+       * Work in Progress
        */
       AmbariDatasource.prototype.metricFindQuery = function (query) {
         var interpolated;
@@ -174,10 +175,6 @@ define([
                 case "host_components":
                   dname = metric.HostRoles.component_name;
                   //iterate through all component names
-                  break;
-                default:
-                  dname = metric.metrics;
-                  // this won't work because metrics cannot be iterated through .items - needs to be removed..
                   break;
               }
               return {
