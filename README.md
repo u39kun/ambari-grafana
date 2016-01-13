@@ -90,6 +90,8 @@ Create a new Graph
 
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/select-metric.png "Create a new graph - select metric")
 
+![Alt text](https://raw.githubusercontent.com/prajwalrao/ambari-grafana/master/screenshots/host-level-metrics.png "Create a new graph - select host")
+
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/select-unit.png "Create a new graph - select unit")
 
 ![Alt text](https://raw.githubusercontent.com/u39kun/ambari-grafana/master/screenshots/set-title.png "Create a new graph - set title")
