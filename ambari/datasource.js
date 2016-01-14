@@ -41,7 +41,6 @@ define([
 
         return backendSrv.datasourceRequest(options);
       };
-      
       /**
        * Ambari Datasource - Initialize Component to Service Mapping.
        *
@@ -149,6 +148,7 @@ define([
 
       /**
        * Ambari Datasource Templating Variables.
+       * Work in Progress
        */
       AmbariDatasource.prototype.metricFindQuery = function (query) {
         var interpolated;
@@ -176,10 +176,6 @@ define([
                   dname = metric.HostRoles.component_name;
                   //iterate through all component names
                   break;
-                default:
-                  dname = metric.metrics;
-                  // this won't work because metrics cannot be iterated through .items - needs to be removed..
-                  break;
               }
               return {
                 text: dname,
@@ -192,7 +188,7 @@ define([
       /**
        * Ambari Datasource - Test Data Source Connection.
        *
-       * Added Check to see if Datasource is working. Throws up an error in the 
+       * Added Check to see if Datasource is working. Throws up an error in the
        * Datasources page if incorrect info is passed on.
        */
       AmbariDatasource.prototype.testDatasource = function () {
@@ -233,7 +229,7 @@ define([
       /**
        * Ambari Datasource Suggest Hosts
        *
-       * Query Hosts of the datasource's cluster and add them to a dropdown 
+       * Query Hosts of the datasource's cluster and add them to a dropdown
        */
       AmbariDatasource.prototype.suggestHosts = function (query) {
         console.log(query);
@@ -248,7 +244,7 @@ define([
 
       /**
        * Ambari Datasource Suggest Metrics
-       * 
+       *
        * Suggest Metrics based on the component chosen and store in cache.
        */
       var serviceMetricKeyCache = {};
