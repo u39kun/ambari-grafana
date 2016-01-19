@@ -104,7 +104,7 @@ define([
                 return $q.when(emptyData(target.metric));
               }
               var timeSeries = {};
-              if (target.hosts === undefined) {
+              if (target.hosts === undefined || target.hosts.trim() == "") {
                 timeSeries = {
                   target: target.metric,
                   datapoints: []
