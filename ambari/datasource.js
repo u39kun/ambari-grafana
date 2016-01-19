@@ -103,10 +103,18 @@ define([
                 // return empty data if the data doesn't exist
                 return $q.when(emptyData(target.metric));
               }
-              var timeSeries = {
-                target: target.metric,
-                datapoints: []
-              };
+              var timeSeries = {};
+              if (target.hosts === undefined || target.hosts.trim() == "") {
+                timeSeries = {
+                  target: target.metric,
+                  datapoints: []
+                };
+              } else {
+                timeSeries = {
+                  target: target.metric + ' on ' + target.hosts,
+                  datapoints: []
+                };
+              }
               for (var i in metricData) {
                 var item = metricData[i];
                 timeSeries.datapoints[i] = [item[0], item[1] * 1000];
