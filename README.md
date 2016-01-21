@@ -18,19 +18,19 @@ You can install Grafana on any host.  It does not need to be co-located with Amb
 
 Install on CentOS/Red Hat:
 ```
-sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
+sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm
 ```
 
 Install on Ubuntu/Debian:
 ```
-wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.5.0_amd64.deb
+wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.6.0_amd64.deb
 sudo apt-get install -y adduser libfontconfig
 sudo dpkg -i grafana_2.5.0_amd64.deb
 ```
 
 Install on SUSE/SLES:
 ```
-sudo rpm -i --nodeps grafana-2.5.0-1.x86_64.rpm
+sudo rpm -i --nodeps grafana-2.6.0-1.x86_64.rpm
 ```
 
 Deploy ambari-grafana
