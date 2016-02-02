@@ -70,28 +70,27 @@ define([
          * Ambari Datasource Query (called once per graph)
          */
         AmbariDatasource.prototype.query = function (options) {
-
           var emptyData = function (metric) {
             return {
               data: {
                 target: metric,
                 datapoints: []
               }
-            }
-          }
+            };
+          };
 
           var self = this;
 
           var getMetricsData = function(target, service) {
             return function(res) {
               console.log('processing metric ' + target.metric);
-              if (!res.metrics) {
+              if (!res.metrics || target.hide) {
                 return $q.when(emptyData(target.metric));
               }
               var series = [];
               var metricData = res;
               var metricPath = target.metric.split('/');
-              if (target.hosts == undefined || target.hosts.trim() == "") {
+              if (target.hosts === undefined || target.hosts.trim() === "") {
                 metricPath[metricPath.length - 1] += "._" + target.aggregator;
               }
               try {
@@ -99,12 +98,12 @@ define([
                   metricData = metricData[metricPath[path]];
                 }
               } catch (ex) {
-                console.log('data does not exist in API result.  returning empty data.')
+                console.log('data does not exist in API result.  returning empty data.');
                 // return empty data if the data doesn't exist
                 return $q.when(emptyData(target.metric));
               }
               var timeSeries = {};
-              if (target.hosts === undefined || target.hosts.trim() == "") {
+              if (target.hosts === undefined || target.hosts.trim() === "") {
                 timeSeries = {
                   target: target.metric,
                   datapoints: []
@@ -121,8 +120,8 @@ define([
               }
               series.push(timeSeries);
               return $q.when({data: series});
-            }
-          }
+            };
+          };
 
           var getHostComponentData = function(target, service, timeRange) {
             var fields = target.metric + timeRange;
@@ -130,7 +129,7 @@ define([
                 + target.component + '?fields=' + fields).then(
                 getMetricsData(target, service)
             );
-          }
+          };
 
           var getServiceComponentData = function(target, service, timeRange) {
             var fields = target.metric + "._" + target.aggregator + timeRange;
@@ -138,14 +137,14 @@ define([
                 + target.component + '?' + 'fields=' + fields).then(
                 getMetricsData(target, service)
             );
-          }
+          };
 
           var from = Math.floor(options.range.from.valueOf() / 1000);
           var to = Math.floor(options.range.to.valueOf() / 1000);
           var timeRange = '[' + from + ',' + to + ',15]';
 
           // if componentToServiceMapping has not initialized yet, return empty data
-          if (Object.keys(componentToServiceMapping).length == 0) {
+          if (Object.keys(componentToServiceMapping).length === 0) {
             return $q.when([]);
           }
 
@@ -159,13 +158,12 @@ define([
               return getServiceComponentData(target, service, timeRange);
             }
           });
-
           return $q.all(metricsPromises).then(function(metricsDataArray) {
             var data = _.map(metricsDataArray, function(metricsData) {
-              return metricsData.data
-            })
-            var metricsDataResult = {data: _.flatten(data)}
-            return $q.when(metricsDataResult)
+              return metricsData.data;
+            });
+            var metricsDataResult = {data: _.flatten(data)};
+            return $q.when(metricsDataResult);
           });
         };
 

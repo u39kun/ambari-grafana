@@ -39,8 +39,8 @@
     <ul class="tight-form-list" role="menu">
 
         <li class="tight-form-item" style="width: 86px">
-        Component
-    </li>
+            Component
+        </li>
         <li>
             <input type="text" class="input-large tight-form-input" ng-model="target.component"
                    spellcheck='false' bs-typeahead="suggestComponents" placeholder="component name" data-min-length=0 data-items=100
@@ -50,11 +50,6 @@
                 <i class="fa fa-warning"></i>
             </a>
         </li>
-
-
-
-
-
 
 
         <li class="tight-form-item" style="width: 86px">
@@ -85,7 +80,6 @@
         </li>
 
 
-
         <li class="tight-form-item" ng-hide="target.hosts">
             Aggregator
         </li>
@@ -97,40 +91,6 @@
             <a bs-tooltip="target.errors.aggregator" style="color: rgb(229, 189, 28)" ng-show="target.errors.aggregator">
                 <i class="fa fa-warning"></i>
             </a>
-        </li>
-    </ul>
-
-    <div class="clearfix"></div>
-</div>
-
-<div class="tight-form">
-    <ul class="tight-form-list" role="menu">
-        <li class="tight-form-item tight-form-align" style="width: 86px">
-            <editor-checkbox text="Rate" model="target.shouldComputeRate" change="targetBlur()"></editor-checkbox>
-        </li>
-
-        <li class="tight-form-item" ng-hide="!target.shouldComputeRate">
-            <editor-checkbox text="Counter" model="target.isCounter" change="targetBlur()"></editor-checkbox>
-        </li>
-
-        <li class="tight-form-item" ng-hide="!target.isCounter">
-            Counter Max:
-        </li>
-
-        <li ng-hide="!target.isCounter">
-            <input type="text" class="tight-form-input input-small" ng-disabled="!target.shouldComputeRate"
-                   ng-model="target.counterMax" spellcheck='false'
-                   placeholder="max value" ng-model-onblur
-                   ng-blur="targetBlur()"></input>
-        </li>
-        <li class="tight-form-item" ng-hide="!target.isCounter">
-            Reset Value:
-        </li>
-        <li ng-hide="!target.isCounter">
-            <input type="text" class="tight-form-input input-small" ng-disabled="!target.shouldComputeRate"
-                   ng-model="target.counterResetValue" spellcheck='false'
-                   placeholder="reset value" ng-model-onblur
-                   ng-blur="targetBlur()"></input>
         </li>
     </ul>
 
