@@ -3,6 +3,14 @@
 Use **ambari-grafana** to visualize metrics exposed via Ambari in Grafana.
 The following service metrics are supported as of now: HDFS, YARN, HBase, Storm, Kafka, Flume, Accumulo, and Ambari Metrics
 
+---
+
+NOTE: Development of Ambari Grafana plugin has moved to: https://github.com/apache/ambari/tree/trunk/ambari-metrics/ambari-metrics-grafana
+
+This repository is no longer actively maintained.
+
+---
+
 *This has been tested with Ambari 2.1.2/2.2.0 + HDP 2.3.*
 
 **ambari-grafana** is licensed under the Apache License, Version 2.0.
